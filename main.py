@@ -1,6 +1,7 @@
-import sys
-import DHTSensor
+import dht_sensor
 
+
+sensor = dht_sensor.DHTSensor(4)
 while True:
-    result = DHTSensor.read(4)
+    result = sensor.read()
     print(result)
