@@ -1,9 +1,18 @@
 import dht_sensor
+import rele
 
 
-sensor = dht_sensor.DHTSensor(4)
+# sensor = dht_sensor.DHTSensor(4)
+# while True:
+#     result = sensor.read()
+#     print(result)
+
+
+rele = rele.Rele(6)
+
 while True:
-    result = sensor.read()
-    print(result)
-    print('bla')
-
+    a = input()
+    if a == 0:
+        rele.off()
+    elif a == 1:
+        rele.on()
