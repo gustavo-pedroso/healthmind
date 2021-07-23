@@ -17,3 +17,4 @@ while True:
         rele.off()
     elif a == 1:
         rele.on()
+    print(a)
