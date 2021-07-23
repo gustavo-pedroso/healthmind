@@ -8,11 +8,12 @@ import rele
 #     print(result)
 
 
-rele = rele.Rele(11)
+rele = rele.Rele(17)
 
 while True:
     a = input()
     print(a)
+    print(type(a))
     if a == 0:
         rele.off()
     elif a == 1:
