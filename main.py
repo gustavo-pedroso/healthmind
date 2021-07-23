@@ -8,7 +8,7 @@ import rele
 #     print(result)
 
 
-rele = rele.Rele(17)
+rele = rele.Rele(11)
 
 while True:
     a = input()
