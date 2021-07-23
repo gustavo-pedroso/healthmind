@@ -12,8 +12,7 @@ rele = rele.Rele(17)
 
 while True:
     a = input()
-    print(a)
-    print(type(a))
+    a = int(a)
     if a == 0:
         rele.off()
     elif a == 1:
