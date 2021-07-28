@@ -14,7 +14,7 @@ class Incubator:
 
     def monitor(self):
         temperature = self.sensor.read()['temperature']
-        print(f'current temperature: {temperature}°C / target temperature {self.target_temperature}')
+        print(f'current temperature: {temperature}°C / target temperature {self.target_temperature}°C')
         if temperature < self.target_temperature:
             self.switch.on()
         elif temperature >= self.target_temperature:
