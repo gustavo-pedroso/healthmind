@@ -24,5 +24,5 @@ class Incubator:
         print(f'heater state: {self.switch.get_state()}')
         if log_file:
             with open(log_file, 'a+') as f:
-                t = datetime.now().strftime('%d/%m/%Y %H:%M%S')
+                t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
                 f.write(f'{t} - {temperature} / {self.target_temperature} / {self.switch.get_state()}\n')
