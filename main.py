@@ -1,14 +1,16 @@
 import dht_sensor
-import rele
+import switch
+from incubator import Incubator
+import time
 
 
-sensor = dht_sensor.DHTSensor(17)
-while True:
-    result = sensor.read()
-    print(result)
+# sensor = dht_sensor.DHTSensor(17)
+# while True:
+#     result = sensor.read()
+#     print(result)
 
 
-# rele = rele.Rele(17)
+# rele = switch.Switch(17)
 #
 # while True:
 #     a = input()
@@ -18,3 +20,9 @@ while True:
 #     elif a == 1:
 #         rele.on()
 #     print(a)
+
+incubator = Incubator(18, 23, 30)
+
+while True:
+    incubator.monitor()
+    time.sleep(3)
