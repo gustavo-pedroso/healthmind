@@ -8,7 +8,7 @@ class Incubator:
     def __init__(self, sensor_gpio_number, switch_gpio_number, target_temperature):
         self.sensor = DHTSensor(sensor_gpio_number)
         self.switch = Switch(switch_gpio_number)
-        self.target_temperature = target_temperature
+        self.target_temperature = float(target_temperature)
 
     def set_temperature(self, target_temperature):
         self.target_temperature = target_temperature
@@ -24,5 +24,5 @@ class Incubator:
         print(f'heater state: {self.switch.get_state()}')
         if log_file:
             with open(log_file, 'a+') as f:
-                t = datetime.now().isoformat()
-                f.write(f'{t} - {temperature}/{self.target_temperature}/{self.switch.get_state()}\n')
+                t = datetime.now().strftime('%d/%m/%Y %H:%M%S')
+                f.write(f'{t} - {temperature} / {self.target_temperature} / {self.switch.get_state()}\n')
