@@ -14,7 +14,7 @@ class Switch:
         self.switch.off()
 
     def get_state(self):
-        if self.switch.is_lit():
+        if self.switch.is_lit:
             return 'ON'
         else:
             return 'OFF'
