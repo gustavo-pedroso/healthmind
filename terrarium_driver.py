@@ -16,10 +16,11 @@ terrarium = Terrarium(sensor_gpio=12,
                       fans_active_time=30,
                       fans_hours=[0, 8, 16],
                       lights_ranges=[(20, 8)],
-                      update_time=10)
+                      update_time=10,
+                      email_notify_hours=list(range(0, 24)))
 
 
 while current_time - start_time < 86400 - terrarium.update_time:
-    terrarium.monitor(sys.argv[1])
+    terrarium.monitor(sys.argv[1], sys.argv[2])
     time.sleep(terrarium.update_time)
     current_time = int(time.time())

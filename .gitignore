@@ -1,3 +1,5 @@
 .idea/*
 venv/
 Adafruit_Python_DHT/
+terrarium_email_info.json
+incubator_email_info.json

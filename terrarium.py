@@ -1,5 +1,6 @@
 from switch import Switch
 from dht_sensor import DHTSensor
+from email_util import EmailUtil
 from datetime import datetime
 import time
 
@@ -7,7 +8,7 @@ import time
 class Terrarium:
 
     def __init__(self, sensor_gpio, humidifier_gpio, fans_gpio, heaters_gpio, lights_gpio, target_temperature,
-                 target_humidity, fans_active_time, fans_hours, lights_ranges, update_time):
+                 target_humidity, fans_active_time, fans_hours, lights_ranges, update_time, email_notify_hours):
         self.sensor = DHTSensor(sensor_gpio)
         self.humidifier = Switch(humidifier_gpio)
         self.fans = Switch(fans_gpio)
@@ -19,9 +20,10 @@ class Terrarium:
         self.fans_hours = fans_hours
         self.lights_ranges = lights_ranges
         self.update_time = update_time
+        self.email_notify_hours = email_notify_hours
         self.fan_start = -9999999
 
-    def monitor(self, log_file=None):
+    def monitor(self, log_file=None, json_email_info=None):
         sensor_data = self.sensor.read()
         temperature = sensor_data['temperature']
         humidity = sensor_data['humidity']
@@ -57,6 +59,13 @@ class Terrarium:
                 self.lights.on()
             else:
                 self.lights.off()
+
+        if json_email_info:
+            if datetime.now().hour in self.email_notify_hours:
+                self.email_notify_hours.remove(datetime.now().hour)
+                email = EmailUtil(json_email_info)
+                msg = f'Terrarium Running OK\nTemperature: {temperature}\nHumidity: {humidity}'
+                email.send_email(msg)
 
         print(f'temperature: {temperature} / {self.target_temperature} | heater: {self.heaters.get_state()} | ', end='')
         print(f'humidity: {humidity} / {self.target_humidity} | humidifier: {self.humidifier.get_state()}')
