@@ -9,7 +9,7 @@ try:
         pid = f.read()
     os.kill(int(pid), signal.SIGTERM)
 except Exception as e:
-    print(repr(e))
+    raise e
 
 with open("/home/pi/Documents/healthmind/incubator_last_pid.tmp", "w+") as f:
     f.write(str(os.getpid()))
