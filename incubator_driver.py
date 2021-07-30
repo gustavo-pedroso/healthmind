@@ -6,7 +6,11 @@ start_time = int(time.time())
 current_time = int(time.time())
 
 # create new Incubator with sensor, switch and target temperature
-incubator = Incubator(21, 20, 30, 10, list(range(0, 24)))
+incubator = Incubator(sensor_gpio=21,
+                      heater_gpio=20,
+                      target_temperature=27,
+                      update_time=10,
+                      email_notify_hours=list(range(0, 24)))
 
 
 # run for 10mins and exit, scheduled in cron for every 10mins
