@@ -20,11 +20,10 @@ class Incubator:
         temperature = self.sensor.read()['temperature']
 
         # monitor temperature
-        if self.heater.on():
-            if temperature < self.target_temperature:
-                self.heater.on()
-            else:
-                self.heater.off()
+        if temperature < self.target_temperature:
+            self.heater.on()
+        else:
+            self.heater.off()
 
         if json_email_info:
             if datetime.now().hour in self.email_notify_hours:
