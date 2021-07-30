@@ -23,7 +23,7 @@ class FileLogger:
         self.log_buffer = []
 
     def log(self, log_message):
-        if len(self.log_buffer) <= 5:
+        if len(self.log_buffer) < 100:
             self.log_buffer.append(log_message)
         else:
             with open(self.file, 'a+') as f:
