@@ -16,7 +16,7 @@ class Incubator:
     def set_temperature(self, target_temperature):
         self.target_temperature = target_temperature
 
-    def monitor(self, json_email_info, log_file=None):
+    def monitor(self, log_file=None, json_email_info=None):
         temperature = self.sensor.read()['temperature']
 
         # monitor temperature
