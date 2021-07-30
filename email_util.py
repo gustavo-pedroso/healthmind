@@ -22,7 +22,7 @@ class EmailUtil:
             server.ehlo()
             server.starttls()
             server.login(self.email_info_json['login'], self.email_info_json['password'])
-            server.sendmail(self.email_info_json['sender'], self.email_info_json['receiver'], message.as_string())
+            server.sendmail(self.email_info_json['from'], self.email_info_json['to'], message.as_string())
             server.quit()
         except Exception as e:
             print(e)
