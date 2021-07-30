@@ -33,7 +33,7 @@ class FileLogger:
 
 def get_local_weather(api_info):
     with open(api_info) as fp:
-        api_json = json.read(fp)
+        api_json = json.load(fp)
 
     response = requests.get(f"http://api.weatherapi.com/v1/current.json?key={api_json['key']}&q={api_json['q']}")
     geo_temp = response['current']['temp_c']
