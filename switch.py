@@ -6,6 +6,7 @@ class Switch:
     def __init__(self, gpio_number):
         self.gpio_number = gpio_number
         self.switch = LED(self.gpio_number)
+        self.switch.off()
 
     def on(self):
         self.switch.on()
