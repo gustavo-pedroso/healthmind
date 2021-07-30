@@ -21,8 +21,9 @@ import time
 #         rele.on()
 #     print(a)
 
-incubator = Incubator(18, 23, 30)
+# incubator = Incubator(18, 23)
+#
+# while True:
+#     incubator.monitor()
+#     time.sleep(3)
 
-while True:
-    incubator.monitor()
-    time.sleep(3)
