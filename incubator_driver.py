@@ -7,14 +7,12 @@ import signal
 try:
     with open("/home/pi/Documents/healthmind/incubator_last_pid.tmp", "r") as f:
         pid = f.read()
-    print(int(pid))
     os.kill(int(pid), signal.SIGTERM)
-except Exception as e:
-    raise e
+except ProcessLookupError as e:
+    pass
 
 with open("/home/pi/Documents/healthmind/incubator_last_pid.tmp", "w+") as f:
     f.write(str(os.getpid()))
-
 
 start_time = int(time.time())
 current_time = int(time.time())

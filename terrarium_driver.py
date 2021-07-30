@@ -1,6 +1,19 @@
 from terrarium import Terrarium
 import time
 import sys
+import os
+import signal
+
+
+try:
+    with open("/home/pi/Documents/healthmind/terrarium_last_pid.tmp", "r") as f:
+        pid = f.read()
+    os.kill(int(pid), signal.SIGTERM)
+except ProcessLookupError as e:
+    pass
+
+with open("/home/pi/Documents/healthmind/terrarium_last_pid.tmp", "w+") as f:
+    f.write(str(os.getpid()))
 
 
 start_time = int(time.time())
