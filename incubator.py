@@ -36,7 +36,7 @@ class Incubator:
             if datetime.now().hour in self.email_notify_hours:
                 self.email_notify_hours.remove(datetime.now().hour)
                 email = EmailUtil(self.json_email_info, self.json_api_info)
-                msg = f'Incubator Running OK\nTemperature: {temperature}\n'
+                msg = f'Incubator Running OK\nTemperature: {temperature}°C\n'
                 email.send_email(msg)
 
         print(f'temperature: {temperature} / {self.target_temperature} | heater: {self.heater.get_state()}')
