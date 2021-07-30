@@ -9,7 +9,7 @@ current_time = int(time.time())
 incubator = Incubator(sensor_gpio=21,
                       heater_gpio=20,
                       target_temperature=27,
-                      update_time=10,
+                      update_time=5,
                       email_notify_hours=list(range(0, 24)))
 
 
