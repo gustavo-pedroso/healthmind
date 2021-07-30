@@ -36,7 +36,7 @@ def get_local_weather(api_info):
         api_json = json.load(fp)
 
     response = requests.get(f"http://api.weatherapi.com/v1/current.json?key={api_json['key']}&q={api_json['q']}")
-    response = json.load(response)
+    response = json.loads(response)
     geo_temp = response['current']['temp_c']
     geo_humidity = response['current']['humidity']
     geo_location = response['location']['name']
