@@ -1,3 +1,4 @@
+import json
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -6,7 +7,8 @@ from email.mime.text import MIMEText
 class EmailUtil:
 
     def __init__(self, email_info_json):
-        self.email_info_json = email_info_json
+        with open(email_info_json) as fp:
+            self.email_info_json = json.load(fp)
 
     def send_email(self, msg):
         try:
