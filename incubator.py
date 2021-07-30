@@ -15,14 +15,15 @@ class Incubator:
 
     def monitor(self, log_file=None):
         temperature = self.sensor.read()['temperature']
+
+        # monitor temperature
         if temperature < self.target_temperature:
             self.heater.on()
-        elif temperature >= self.target_temperature:
+        else:
             self.heater.off()
 
-        print(f'current temperature: {temperature}°C / target temperature {self.target_temperature}°C')
-        print(f'heater state: {self.heater.get_state()}')
+        print(f'temperature: {temperature} / {self.target_temperature} | heater: {self.heater.get_state()}')
         if log_file:
             with open(log_file, 'a+') as f:
                 t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-                f.write(f'{t} - {temperature} / {self.target_temperature} / {self.heater.get_state()}\n')
+                f.write(f'{t} - temperature: {temperature} / {self.target_temperature} | heater: {self.heater.get_state()}\n')
