@@ -1,23 +1,9 @@
 from terrarium import Terrarium
+from project_utils import kill_previous_from_file
 import time
 import sys
-import os
-import signal
 
-
-try:
-    with open("/home/pi/Documents/healthmind/terrarium_last_pid.tmp", "r") as f:
-        pid = f.read()
-    os.kill(int(pid), signal.SIGTERM)
-except ProcessLookupError as e:
-    pass
-
-with open("/home/pi/Documents/healthmind/terrarium_last_pid.tmp", "w+") as f:
-    f.write(str(os.getpid()))
-
-
-start_time = int(time.time())
-current_time = int(time.time())
+kill_previous_from_file("/home/pi/Documents/healthmind/terrarium_last_pid.tmp")
 
 terrarium = Terrarium(sensor_gpio=12,
                       humidifier_gpio=25,
@@ -32,8 +18,6 @@ terrarium = Terrarium(sensor_gpio=12,
                       update_time=10,
                       email_notify_hours=list(range(0, 24)))
 
-
-while current_time - start_time < 86400 - terrarium.update_time:
+while True:
     terrarium.monitor(sys.argv[1], sys.argv[2])
     time.sleep(terrarium.update_time)
-    current_time = int(time.time())
