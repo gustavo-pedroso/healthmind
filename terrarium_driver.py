@@ -15,7 +15,7 @@ terrarium = Terrarium(sensor_gpio=12,
                       target_humidity=50,
                       fans_active_time=30,
                       fans_hours=[0, 8, 16],
-                      lights_ranges=[(8, 20)],
+                      lights_ranges=[(20, 8)],
                       update_time=10)
 
 

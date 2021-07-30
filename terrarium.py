@@ -49,13 +49,17 @@ class Terrarium:
 
         # monitor lights activation cycles
         for start, end in self.lights_ranges:
-            if datetime.now().hour in range(start, end):
+            if start > end:
+                r = list(range(start, 24)) + list(range(0, end))
+            else:
+                r = range(start, end)
+            if datetime.now().hour in r:
                 self.lights.on()
             else:
                 self.lights.off()
 
         print(f'temperature: {temperature} / {self.target_temperature} | heater: {self.heaters.get_state()} | ', end='')
-        print(f'humidity: {humidity} / {self.target_temperature} | humidifier: {self.humidifier.get_state()}')
+        print(f'humidity: {humidity} / {self.target_humidity} | humidifier: {self.humidifier.get_state()}')
 
         if log_file:
             with open(log_file, 'a+') as f:
