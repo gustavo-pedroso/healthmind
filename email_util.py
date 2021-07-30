@@ -8,6 +8,7 @@ class EmailUtil:
 
     def __init__(self, email_info_json):
         with open(email_info_json) as fp:
+            print(email_info_json)
             self.email_info_json = json.load(fp)
 
     def send_email(self, msg):
