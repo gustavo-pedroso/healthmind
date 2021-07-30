@@ -3,3 +3,5 @@ venv/
 Adafruit_Python_DHT/
 terrarium_email_info.json
 incubator_email_info.json
+incubator_last_pid.json
+terrarium_last_pid.json
