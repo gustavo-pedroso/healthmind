@@ -7,6 +7,7 @@ import signal
 try:
     with open("/home/pi/Documents/healthmind/incubator_last_pid.tmp", "r") as f:
         pid = f.read()
+    print(int(pid))
     os.kill(int(pid), signal.SIGTERM)
 except Exception as e:
     raise e
