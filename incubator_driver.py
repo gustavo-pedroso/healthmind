@@ -1,7 +1,6 @@
 from incubator import Incubator
-from project_utils import kill_previous_from_file
+from project_utils import *
 import time
-import sys
 
 kill_previous_from_file("/home/pi/Documents/healthmind/incubator_last_pid.tmp")
 
@@ -10,8 +9,11 @@ incubator = Incubator(sensor_gpio=21,
                       heater_gpio=20,
                       target_temperature=27,
                       update_time=5,
-                      email_notify_hours=list(range(0, 24)))
+                      email_notify_hours=list(range(0, 24)),
+                      log_file='/home/pi/Documents/healthmind/incubator_logs.txt',
+                      json_email_info='/home/pi/Documents/healthmind/incubator_email_info.json',
+                      json_api_info='/home/pi/Documents/healthmind/api_info.json')
 
 while True:
-    incubator.monitor(sys.argv[1], sys.argv[2])
+    incubator.monitor()
     time.sleep(incubator.update_time)

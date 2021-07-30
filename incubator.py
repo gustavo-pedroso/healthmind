@@ -2,21 +2,28 @@ from switch import Switch
 from dht_sensor import DHTSensor
 from datetime import datetime
 from email_util import EmailUtil
+from project_utils import *
 
 
 class Incubator:
 
-    def __init__(self, sensor_gpio, heater_gpio, target_temperature, update_time, email_notify_hours):
+    def __init__(self, sensor_gpio, heater_gpio, target_temperature, update_time, email_notify_hours, log_file,
+                 json_email_info, json_api_info):
+
         self.sensor = DHTSensor(sensor_gpio)
         self.heater = Switch(heater_gpio)
         self.target_temperature = target_temperature
         self.email_notify_hours = email_notify_hours
         self.update_time = update_time
+        self.log_buffer = []
+        self.log_file = log_file
+        self.json_email_info = json_email_info
+        self.json_api_info = json_api_info
 
-    def set_temperature(self, target_temperature):
-        self.target_temperature = target_temperature
+        if self.log_file:
+            self.file_logger = FileLogger(self.log_file)
 
-    def monitor(self, log_file=None, json_email_info=None):
+    def monitor(self):
         temperature = self.sensor.read()['temperature']
 
         # monitor temperature
@@ -25,15 +32,17 @@ class Incubator:
         else:
             self.heater.off()
 
-        if json_email_info:
+        if self.json_email_info:
             if datetime.now().hour in self.email_notify_hours:
                 self.email_notify_hours.remove(datetime.now().hour)
-                email = EmailUtil(json_email_info)
+                email = EmailUtil(self.json_email_info, self.json_api_info)
                 msg = f'Incubator Running OK\nTemperature: {temperature}\n'
                 email.send_email(msg)
 
         print(f'temperature: {temperature} / {self.target_temperature} | heater: {self.heater.get_state()}')
-        if log_file:
-            with open(log_file, 'a+') as f:
-                t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
-                f.write(f'{t} - temperature: {temperature} / {self.target_temperature} | heater: {self.heater.get_state()}\n')
+        if self.log_file:
+            t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            log_message = f'{t} - temperature: {temperature} / {self.target_temperature} | heater: ' \
+                          f'{self.heater.get_state()}\n'
+
+            self.file_logger.log(log_message)

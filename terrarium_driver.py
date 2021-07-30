@@ -16,8 +16,10 @@ terrarium = Terrarium(sensor_gpio=12,
                       fans_hours=[0, 8, 16],
                       lights_ranges=[(20, 8)],
                       update_time=10,
-                      email_notify_hours=list(range(0, 24)))
+                      email_notify_hours=list(range(0, 24)),
+                      log_file='/home/pi/Documents/healthmind/terrarium_logs.txt',
+                      json_email_info='/home/pi/Documents/healthmind/terrarium_email_info.json')
 
 while True:
-    terrarium.monitor(sys.argv[1], sys.argv[2])
+    terrarium.monitor()
     time.sleep(terrarium.update_time)
