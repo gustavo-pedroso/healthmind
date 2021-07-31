@@ -25,10 +25,11 @@ class Incubator:
 
     def monitor(self):
         temperature = self.sensor.read()['temperature']
+        heater_state = self.heater.get_state()
 
         # monitor temperature
         if temperature < self.target_temperature:
-            if self.heater.get_state() == 'ON':
+            if heater_state == 'ON':
                 self.heater.off()
             else:
                 self.heater.on()
@@ -42,10 +43,10 @@ class Incubator:
                 msg = f'Incubator Running OK\nTemperature: {temperature}°C\n'
                 email.send_email(msg)
 
-        print(f'temperature: {temperature} / {self.target_temperature} | heater: {self.heater.get_state()}')
+        print(f'temperature: {temperature} / {self.target_temperature} | heater: {heater_state}')
         if self.log_file:
             t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             log_message = f'{t} - temperature: {temperature} / {self.target_temperature} | heater: ' \
-                          f'{self.heater.get_state()}\n'
+                          f'{heater_state}\n'
 
             self.file_logger.log(log_message)

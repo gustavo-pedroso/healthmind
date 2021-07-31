@@ -36,6 +36,10 @@ class Terrarium:
         sensor_data = self.sensor.read()
         temperature = sensor_data['temperature']
         humidity = sensor_data['humidity']
+        heaters_state = self.heaters.get_state()
+        humidifier_state = self.humidifier.get_state()
+        lights_state = self.lights.get_state()
+        fans_state = self.fans.get_state()
 
         # monitor temperature
         if temperature < self.target_temperature:
@@ -76,16 +80,16 @@ class Terrarium:
                 msg = f'Terrarium Running OK\nTemperature: {temperature}°C\nHumidity: {humidity}%'
                 email.send_email(msg)
 
-        print(f'temperature: {temperature} / {self.target_temperature} | heater: {self.heaters.get_state()} | ', end='')
-        print(f'humidity: {humidity} / {self.target_humidity} | humidifier: {self.humidifier.get_state()}')
+        print(f'temperature: {temperature} / {self.target_temperature} | heater: {heaters_state} | ', end='')
+        print(f'humidity: {humidity} / {self.target_humidity} | humidifier: {humidifier_state}')
 
         if self.log_file:
             t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
             log_message = f'{t} - temperature: {temperature} / {self.target_temperature} | ' \
                           f'humidity: {humidity} / {self.target_humidity} | ' \
-                          f'heaters: {self.heaters.get_state()} | ' \
-                          f'humidifier: {self.humidifier.get_state()} | ' \
-                          f'lights: {self.lights.get_state()} | ' \
-                          f'fans: {self.fans.get_state()}\n'
+                          f'heaters: {heaters_state} | ' \
+                          f'humidifier: {humidifier_state} | ' \
+                          f'lights: {lights_state} | ' \
+                          f'fans: {fans_state}\n'
 
             self.file_logger.log(log_message)
