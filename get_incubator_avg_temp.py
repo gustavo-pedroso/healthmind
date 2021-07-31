@@ -7,10 +7,10 @@ states = [t.split(' ')[9].replace('\n', '') for t in lines]
 print(f'mode temperature: {statistics.mode(temps)}°C')
 print(f'mean temperature: {statistics.mean(temps)}°C')
 print(f'median temperature: {statistics.median(temps)}°C')
-print(f"heater usage: {round(states.count('ON')/len(states), 4) * 100}%")
+print(f"heater usage: {states.count('ON')/len(states) * 100:.2f}%")
 
 total_temps = len(temps)
 distribution = {k: temps.count(k) for k in set(temps)}
-for line in [f"{k}°C: {distribution[k]} -> {distribution[k]/total_temps * 100}%" for k in sorted(list(distribution.keys()))]:
+for line in [f"{k}°C: {distribution[k]} -> {distribution[k]/total_temps * 100:.2f}%" for k in sorted(list(distribution.keys()))]:
     print(line)
 
