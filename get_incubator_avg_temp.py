@@ -9,7 +9,8 @@ print(f'mean temperature: {statistics.mean(temps)}°C')
 print(f'median temperature: {statistics.median(temps)}°C')
 print(f"heater usage: {(round(states.count('ON')/len(states), 4)) * 100}%")
 
+total_temps = len(temps)
 distribution = {k: temps.count(k) for k in set(temps)}
-for line in [f"{k}: {distribution[k]}" for k in sorted(list(distribution.keys()))]:
+for line in [f"{k}°C: {distribution[k]} -> {round(distribution[k]/total_temps, 4) * 100}%" for k in sorted(list(distribution.keys()))]:
     print(line)
 
