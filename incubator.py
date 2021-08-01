@@ -29,7 +29,10 @@ class Incubator:
 
         # monitor temperature
         if temperature < self.target_temperature:
-            self.heater.on()
+            if heater_state == 'OFF':
+                self.heater.on()
+            else:
+                self.heater.off()
         else:
             self.heater.off()
 
