@@ -1,4 +1,3 @@
-import time
 from switch import Switch
 from dht_sensor import DHTSensor
 from datetime import datetime
@@ -31,8 +30,6 @@ class Incubator:
         # monitor temperature
         if temperature < self.target_temperature:
             self.heater.on()
-            time.sleep(1)
-            self.heater.off()
         else:
             self.heater.off()
 
