@@ -9,7 +9,7 @@ def kill_previous_from_file(file):
         with open(file, "r") as f:
             pid = f.read()
         os.kill(int(pid), signal.SIGTERM)
-    except ProcessLookupError as e:
+    except (ProcessLookupError, FileNotFoundError) as e:
         pass
 
     with open(file, "w+") as f:
