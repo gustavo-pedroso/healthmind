@@ -18,7 +18,8 @@ terrarium = Terrarium(sensor_gpio=16,
                       update_time=10,
                       email_notify_hours=list(range(0, 24)),
                       log_file='/home/pi/Documents/healthmind/terrarium_logs.txt',
-                      json_email_info='/home/pi/Documents/healthmind/terrarium_email_info.json')
+                      json_email_info='/home/pi/Documents/healthmind/terrarium_email_info.json',
+                      json_api_info='/home/pi/Documents/healthmind/api_info.json')
 
 while True:
     terrarium.monitor()
