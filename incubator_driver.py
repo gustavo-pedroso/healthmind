@@ -7,8 +7,8 @@ kill_previous_from_file("/home/pi/Documents/healthmind/incubator_last_pid.tmp")
 # create new Incubator with sensor, switch and target temperature
 incubator = Incubator(sensor_gpio=21,
                       heater_gpio=20,
-                      target_temperature=27,
-                      update_time=1,
+                      target_temperature=25,
+                      update_time=3,
                       email_notify_hours=list(range(0, 24)),
                       log_file='/home/pi/Documents/healthmind/incubator_logs.txt',
                       json_email_info='/home/pi/Documents/healthmind/incubator_email_info.json',
