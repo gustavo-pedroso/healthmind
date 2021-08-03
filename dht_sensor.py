@@ -16,3 +16,4 @@ class DHTSensor:
             humidity, temperature = Adafruit_DHT.read_retry(11, self.gpio_number)
             if self.min_t <= temperature <= self.max_t and self.min_h <= humidity <= self.max_h:
                 return {'humidity': humidity, 'temperature': temperature}
+            print(f'sensor read invalid data: humidity: {humidity}, temperature: {temperature}')
