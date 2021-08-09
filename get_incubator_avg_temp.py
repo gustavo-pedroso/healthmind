@@ -5,7 +5,7 @@ with open('/home/pi/Documents/healthmind/incubator_logs.txt') as log_file:
     lines = log_file.readlines()
 
 if sys.argv[1]:
-    lines = lines[0:sys.argv[1]]
+    lines = lines[0:int(sys.argv[1])]
 
 temps = [float(t.split(' ')[4]) for t in lines]
 states = [t.split(' ')[9].replace('\n', '') for t in lines]
