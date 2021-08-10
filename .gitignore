@@ -1,8 +1,9 @@
 .idea/*
 venv/
 Adafruit_Python_DHT/
-terrarium_email_info.json
-incubator_email_info.json
-incubator_last_pid.json
-terrarium_last_pid.json
-api_info.json
+*.json
+*.pyc
+*.tmp
+incubator_logs.txt
+terrarium_logs.txt
+__pycache__
