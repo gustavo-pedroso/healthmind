@@ -75,6 +75,7 @@ class Terrarium:
 
         if self.json_email_info:
             if datetime.now().hour in self.email_notify_hours:
+                time.sleep(30)
                 self.email_notify_hours.remove(datetime.now().hour)
                 email = EmailUtil(self.json_email_info, self.json_api_info)
                 msg = f'Terrarium Running OK\nTemperature: {temperature}°C\nHumidity: {humidity}%'
