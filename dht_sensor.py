@@ -6,7 +6,7 @@ class DHTSensor:
     def __init__(self, gpio_number):
         self.gpio_number = gpio_number
         self.max_retry = 3
-        self.last_valid = {}
+        self.last_valid = {'humidity': 50.0, 'temperature': 25}
 
         self.min_t = -2.0
         self.max_t = 52.0
