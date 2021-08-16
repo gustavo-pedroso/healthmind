@@ -56,4 +56,4 @@ def read_sensors(sensors):
         humiditys.append(sensor_data['humidity'])
 
     return {'temperature': float(sum(temps)/len(temps)),
-            'humidity:': float(sum(humiditys)/len(humiditys))}
+            'humidity': float(sum(humiditys)/len(humiditys))}
