@@ -10,7 +10,7 @@ class Incubator:
     def __init__(self, sensor_gpio, heater_gpio, target_temperature, update_time, email_notify_hours, log_file,
                  json_email_info, json_api_info):
 
-        self.sensor = DHTSensor(sensor_gpio)
+        self.sensor = [DHTSensor(pin) for pin in sensor_gpio]
         self.heater = Switch(heater_gpio)
         self.target_temperature = target_temperature
         self.email_notify_hours = email_notify_hours
@@ -25,7 +25,7 @@ class Incubator:
 
     def monitor(self):
         try:
-            temperature = self.sensor.read()['temperature']
+            temperature = read_sensors(self.sensor)['temperature']
             heater_state = self.heater.get_state()
 
             # monitor temperature

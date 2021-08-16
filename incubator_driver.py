@@ -5,7 +5,7 @@ import time
 kill_previous_from_file("/home/pi/Documents/healthmind/incubator_last_pid.tmp")
 
 # create new Incubator with sensor, switch and target temperature
-incubator = Incubator(sensor_gpio=21,
+incubator = Incubator(sensor_gpio=[21, 26],
                       heater_gpio=20,
                       target_temperature=25,
                       update_time=5,
