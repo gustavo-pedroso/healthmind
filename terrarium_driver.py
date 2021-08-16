@@ -5,7 +5,7 @@ import sys
 
 kill_previous_from_file("/home/pi/Documents/healthmind/terrarium_last_pid.tmp")
 
-terrarium = Terrarium(sensor_gpio=[16],
+terrarium = Terrarium(sensor_gpio=[16, 13],
                       humidifier_gpio=18,
                       fans_gpio=23,
                       heaters_gpio=25,
