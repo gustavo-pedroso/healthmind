@@ -12,7 +12,7 @@ class Terrarium:
                  target_humidity, fans_active_time, fans_hours, lights_ranges, update_time, email_notify_hours,
                  log_file, json_email_info, json_api_info):
 
-        self.sensor = DHTSensor(sensor_gpio)
+        self.sensor = [DHTSensor(pin) for pin in sensor_gpio]
         self.humidifier = Switch(humidifier_gpio)
         self.fans = Switch(fans_gpio)
         self.heaters = Switch(heaters_gpio)
@@ -33,7 +33,7 @@ class Terrarium:
             self.file_logger = FileLogger(self.log_file)
 
     def monitor(self):
-        sensor_data = self.sensor.read()
+        sensor_data = read_sensors(self.sensor)
         temperature = sensor_data['temperature']
         humidity = sensor_data['humidity']
         heaters_state = self.heaters.get_state()
