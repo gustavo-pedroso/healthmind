@@ -6,4 +6,4 @@ Adafruit_Python_DHT/
 *.tmp
 incubator_logs.txt
 terrarium_logs.txt
-__pycache__
+__pycache__/*
