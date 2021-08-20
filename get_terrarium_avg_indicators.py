@@ -1,3 +1,4 @@
+from terrarium_driver import terrarium
 import statistics
 import sys
 
@@ -5,7 +6,9 @@ with open('/home/pi/Documents/healthmind/terrarium_logs.txt') as log_file:
     lines = log_file.readlines()
 
 if len(sys.argv) > 1:
-    lines = lines[0:int(sys.argv[1])]
+    lines = lines[0: int(sys.argv[1])]
+else:
+    lines = lines[0: int(86400 / terrarium.update_time)]
 
 temps = [float(t.split(' ')[4]) for t in lines]
 humiditys = [float(t.split(' ')[9]) for t in lines]
