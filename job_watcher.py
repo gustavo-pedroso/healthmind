@@ -12,7 +12,7 @@ class JobWatcher:
     def scan(self):
         running = str(os.popen('ps -aux').read())
         for name in self.job_names:
-            if name in running:
+            if name not in running:
                 self.reboot()
 
 
