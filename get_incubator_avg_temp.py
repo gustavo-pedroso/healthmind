@@ -1,4 +1,5 @@
 from incubator_driver import incubator
+from project_utils import get_last_hour_stats
 import statistics
 import sys
 
@@ -6,9 +7,9 @@ with open('/home/pi/Documents/healthmind/incubator_logs.txt') as log_file:
     lines = log_file.readlines()
 
 if len(sys.argv) > 1:
-    lines = lines[-int(sys.argv[1]):]
+    lines = get_last_hour_stats(lines, int(sys.argv[1]), incubator.update_time)
 else:
-    lines = lines[-int(86400 / incubator.update_time):]
+    lines = get_last_hour_stats(lines, 24, incubator.update_time)
 
 temps = [float(t.split(' ')[4]) for t in lines]
 states = [t.split(' ')[9].replace('\n', '') for t in lines]

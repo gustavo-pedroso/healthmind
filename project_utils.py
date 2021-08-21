@@ -57,3 +57,12 @@ def read_sensors(sensors):
 
     return {'temperature': float(sum(temps)/len(temps)),
             'humidity': float(sum(humiditys)/len(humiditys))}
+
+
+def get_last_hour_stats(lines, hours, update_time):
+    seconds_in_a_hour = 3600
+    datapoints_in_a_hour = int(seconds_in_a_hour / update_time)
+    total_datapoints = int(hours * datapoints_in_a_hour)
+    total_datapoints = min(len(lines), total_datapoints)
+    print(total_datapoints)
+    return lines[-total_datapoints:]
