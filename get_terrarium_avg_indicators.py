@@ -10,8 +10,6 @@ if len(sys.argv) > 1:
 else:
     lines = lines[0: int(86400 / terrarium.update_time)]
 
-print(len(lines), int(86400 / terrarium.update_time))
-
 temps = [float(t.split(' ')[4]) for t in lines]
 humiditys = [float(t.split(' ')[9]) for t in lines]
 state_heaters = [t.split(' ')[14] for t in lines]
