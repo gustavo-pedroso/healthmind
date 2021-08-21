@@ -17,6 +17,8 @@ class JobWatcher:
 
 
 if __name__ == '__main__':
-    job_watcher = JobWatcher(['incubator_driver.py',
-                              'terrarium_driver.py'])
+    job_watcher = JobWatcher(['/bin/sh -c sleep 60 && python3 /home/pi/Documents/healthmind/incubator_driver.py',
+                              '/bin/sh -c sleep 60 && python3 /home/pi/Documents/healthmind/terrarium_driver.py',
+                              'python3 /home/pi/Documents/healthmind/incubator_driver.py',
+                              'python3 /home/pi/Documents/healthmind/terrarium_driver.py'])
     job_watcher.scan()
