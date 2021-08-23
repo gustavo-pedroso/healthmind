@@ -1,3 +1,4 @@
+import os
 from gpiozero import LED
 
 
@@ -10,9 +11,13 @@ class Switch:
 
     def on(self):
         self.switch.on()
+        if self.get_state() != 'ON':
+            os.system('sudo reboot')
 
     def off(self):
         self.switch.off()
+        if self.get_state() != 'OFF':
+            os.system('sudo reboot')
 
     def get_state(self):
         if self.switch.is_lit:
