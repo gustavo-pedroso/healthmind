@@ -19,6 +19,10 @@ class JobWatcher:
 
         for name in self.file_names:
             if int(time.time()) - int(os.path.getmtime(name)) > 30 * 60:
+                print('bye bye stupid')
+                print(name)
+                print(int(time.time()) - int(os.path.getmtime(name)))
+                print(int(time.time()))
                 self.reboot()
 
 
