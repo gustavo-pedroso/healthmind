@@ -18,6 +18,7 @@ class JobWatcher:
             if running.count(name) < self.job_names[name]:
                 print(f'ops :| linux says we are missing some required processes. Rebooting :(')
                 self.reboot()
+        print(f'All required process up and running :D')
 
         for name in self.file_names:
             last_modified_date = int(os.path.getmtime(name))
@@ -27,6 +28,7 @@ class JobWatcher:
             if now - last_modified_date > 60 * 30:
                 print(f'{name} was not updated in the last 30min, rebooting :/')
                 self.reboot()
+        print('We good broh... keep chilling')
 
 
 if __name__ == '__main__':
