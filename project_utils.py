@@ -79,4 +79,4 @@ def log_reboot_causes(cause):
     default_log_file = '/home/pi/Documents/healthmind/reboot_logs.txt'
     t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
     with open(default_log_file, 'a+') as f:
-        f.write(cause)
+        f.write(f'{t}: {cause}\n')
