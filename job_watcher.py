@@ -17,6 +17,7 @@ class JobWatcher:
         running = str(os.popen('ps -aux').read())
         for name in self.job_names.keys():
             if running.count(name) < self.job_names[name]:
+                print(f'ops :| linux says we are missing some required processes. Rebooting :(')
                 log_reboot_causes(f'ops :| linux says we are missing some required processes. Rebooting :(')
                 self.reboot()
         print(f'All required process up and running :D')
