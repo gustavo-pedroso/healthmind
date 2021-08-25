@@ -64,5 +64,4 @@ def get_last_hour_stats(lines, hours, update_time):
     datapoints_in_a_hour = int(seconds_in_a_hour / update_time)
     total_datapoints = int(hours * datapoints_in_a_hour)
     total_datapoints = min(len(lines), total_datapoints)
-    print(total_datapoints)
     return lines[-total_datapoints:]
