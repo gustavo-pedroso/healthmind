@@ -1,4 +1,4 @@
-from project_utils import get_last_hour_stats
+from project_utils import get_last_hour_stats, safe_list_get
 from terrarium_driver import terrarium
 import statistics
 import sys
@@ -6,17 +6,15 @@ import sys
 with open('/home/pi/Documents/healthmind/terrarium_logs.txt') as log_file:
     lines = log_file.readlines()
 
-if len(sys.argv) > 1:
-    lines = get_last_hour_stats(lines, int(sys.argv[1]), terrarium.update_time)
-else:
-    lines = get_last_hour_stats(lines, 24, terrarium.update_time)
+hours = int(safe_list_get(sys.argv, 1, 24))
+lines = get_last_hour_stats(lines, hours, terrarium.update_time)
 
 temps = [float(t.split(' ')[4]) for t in lines]
 humiditys = [float(t.split(' ')[9]) for t in lines]
 state_heaters = [t.split(' ')[14] for t in lines]
 state_humidifier = [t.split(' ')[17] for t in lines]
 
-print(f'terrarium data from last {int(sys.argv[1])} hours:')
+print(f'terrarium data from last {hours} hours:')
 print('#############################################################')
 print(f'mode temperature: {statistics.mode(temps)}°C')
 print(f'mean temperature: {statistics.mean(temps):.2f}°C')

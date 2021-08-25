@@ -65,3 +65,10 @@ def get_last_hour_stats(lines, hours, update_time):
     total_datapoints = int(hours * datapoints_in_a_hour)
     total_datapoints = min(len(lines), total_datapoints)
     return lines[-total_datapoints:]
+
+
+def safe_list_get(arr, idx, default):
+    try:
+        return arr[idx]
+    except IndexError:
+        return default
