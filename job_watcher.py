@@ -1,6 +1,7 @@
 import os
 import time
 from datetime import datetime
+from project_utils import log_reboot_causes
 
 
 class JobWatcher:
@@ -16,7 +17,7 @@ class JobWatcher:
         running = str(os.popen('ps -aux').read())
         for name in self.job_names.keys():
             if running.count(name) < self.job_names[name]:
-                print(f'ops :| linux says we are missing some required processes. Rebooting :(')
+                log_reboot_causes(f'ops :| linux says we are missing some required processes. Rebooting :(')
                 self.reboot()
         print(f'All required process up and running :D')
 
@@ -26,7 +27,7 @@ class JobWatcher:
             last_modified_date_ts = datetime.fromtimestamp(last_modified_date).strftime('%Y-%m-%d %H:%M:%S')
             print(f'{name} was last modified at: {last_modified_date_ts}')
             if now - last_modified_date > 60 * 30:
-                print(f'{name} was not updated in the last 30min, rebooting :/')
+                log_reboot_causes(f'{name} was not updated in the last 30min, rebooting :/')
                 self.reboot()
         print('We good broh... keep chilling')
 

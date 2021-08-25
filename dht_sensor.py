@@ -1,3 +1,4 @@
+from project_utils import log_reboot_causes
 import Adafruit_DHT
 import os
 
@@ -28,5 +29,6 @@ class DHTSensor:
             retry += 1
         self.current_failures_in_a_row += 1
         if self.current_failures_in_a_row == self.max_failure_count_reboot:
+            log_reboot_causes('sensor read failures in a row exceeded maximum allowed')
             os.system('sudo reboot')
         return self.last_valid
