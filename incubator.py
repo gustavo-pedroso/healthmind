@@ -44,7 +44,7 @@ class Incubator:
 
                     msg = f"Incubator Indicators:\n" \
                           f"Temperature: {temperature}°C, target: {self.target_temperature}°C\n" \
-                          f"\nIncubator Devices:\n" \
+                          f"Incubator Devices:\n" \
                           f"Heater: {self.heater.get_state()}\n"
                     email.send_email(msg)
 

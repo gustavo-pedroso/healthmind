@@ -80,9 +80,9 @@ class Terrarium:
                 email = EmailUtil(self.json_email_info, self.json_api_info)
 
                 msg = f"Terrarium Indicators:\n" \
-                      f"Teperature: {temperature}°C, target: {self.target_temperature}°C\n" \
+                      f"Temperature: {temperature}°C, target: {self.target_temperature}°C\n" \
                       f"Humidity: {humidity}%, target: {self.target_humidity}%\n" \
-                      f"\nTerrarium Devices:\n" \
+                      f"Terrarium Devices:\n" \
                       f"Heaters: {self.heaters.get_state()}\n" \
                       f"Humidifier: {self.humidifier.get_state()}\n" \
                       f"Lights: {self.lights.get_state()}\n" \

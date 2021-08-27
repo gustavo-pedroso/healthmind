@@ -22,6 +22,7 @@ class EmailUtil:
             message.attach(MIMEText(msg, "plain"))
             message.attach(MIMEText(get_room_readings_message(), "plain"))
             message.attach(MIMEText(get_local_weather(self.json_api_info), "plain"))
+            message.attach(MIMEText(get_last_reboot_log_message(), "plain"))
 
             server = smtplib.SMTP('smtp.office365.com', 587)
             server.ehlo()

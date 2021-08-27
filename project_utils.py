@@ -57,6 +57,14 @@ def get_room_readings_message():
     return room_readings_message
 
 
+def get_last_reboot_log_message():
+    default_log_file = '/home/pi/Documents/healthmind/reboot_logs.txt'
+    with open(default_log_file, 'r+') as f:
+        last_reboot_log = f.readlines()[-1]
+    last_reboot_log_message = f"Last Reboot log:\n{last_reboot_log}\n"
+    return last_reboot_log_message
+
+
 def read_sensors(sensors):
     temps = []
     humiditys = []
