@@ -1,4 +1,3 @@
-from dht_sensor import DHTSensor
 from datetime import datetime
 import signal
 import os
@@ -50,6 +49,7 @@ def get_local_weather(api_info):
 
 
 def get_room_readings_message():
+    from dht_sensor import DHTSensor
     sensor_data = DHTSensor(5).read()
     room_readings_message = f"\n\nRoom Indicators:\n" \
                             f"Temperature: {sensor_data['temperature']}°C\n" \
