@@ -1,3 +1,4 @@
+from dht_sensor import DHTSensor
 from datetime import datetime
 import signal
 import os
@@ -42,10 +43,18 @@ def get_local_weather(api_info):
     geo_humidity = response['current']['humidity']
     geo_location = response['location']['name']
 
-    local_weather_message = f"\n\nLocation: {geo_location}\n" \
+    local_weather_message = f"\n\nCity Indicators: {geo_location}\n" \
                             f"Temperature: {geo_temp}°C\n" \
-                            f"Humidity: {geo_humidity}%"
+                            f"Humidity: {geo_humidity}%\n"
     return local_weather_message
+
+
+def get_room_readings_message():
+    sensor_data = DHTSensor(5).read()
+    room_readings_message = f"\n\nRoom Indicators:\n" \
+                            f"Temperature: {sensor_data['temperature']}°C\n" \
+                            f"Humidity: {sensor_data['humidity']}%\n"
+    return room_readings_message
 
 
 def read_sensors(sensors):
@@ -80,3 +89,4 @@ def log_reboot_causes(cause):
     t = datetime.now().strftime('%d/%m/%Y %H:%M:%S')
     with open(default_log_file, 'a+') as f:
         f.write(f'{t}: {cause}\n')
+

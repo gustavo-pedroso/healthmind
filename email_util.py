@@ -20,6 +20,7 @@ class EmailUtil:
             message["To"] = self.email_info_json['to']
             message["Subject"] = self.email_info_json['subject']
             message.attach(MIMEText(msg, "plain"))
+            message.attach(MIMEText(get_room_readings_message(), "plain"))
             message.attach(MIMEText(get_local_weather(self.json_api_info), "plain"))
 
             server = smtplib.SMTP('smtp.office365.com', 587)
