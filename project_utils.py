@@ -98,3 +98,18 @@ def log_reboot_causes(cause):
     with open(default_log_file, 'a+') as f:
         f.write(f'{t}: {cause}\n')
 
+
+def get_sentiment(target_t, target_h, temperature, humidity, tolerance):
+    target_t = target_t if target_t else 1
+    target_h = target_h if target_h else 1
+    temperature = temperature if temperature else 1
+    humidity = humidity if humidity else 1
+
+    lower_tol = 1 - tolerance
+    upper_tol = 1 + tolerance
+
+    sentiment = 'NÃO TAMO BEM'
+    if target_t * lower_tol < temperature < target_t * upper_tol:
+        if target_h * lower_tol < humidity < target_h * upper_tol:
+            sentiment = 'TAMO BEM'
+    return sentiment

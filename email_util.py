@@ -13,12 +13,12 @@ class EmailUtil:
         with open(email_info_json) as fp:
             self.email_info_json = json.load(fp)
 
-    def send_email(self, msg):
+    def send_email(self, msg, sentiment):
         try:
             message = MIMEMultipart()
             message["From"] = self.email_info_json['from']
             message["To"] = self.email_info_json['to']
-            message["Subject"] = self.email_info_json['subject']
+            message["Subject"] = f"{self.email_info_json['subject']} - ({sentiment})"
             message.attach(MIMEText(msg, "plain"))
             message.attach(MIMEText(get_room_readings_message(), "plain"))
             message.attach(MIMEText(get_local_weather(self.json_api_info), "plain"))

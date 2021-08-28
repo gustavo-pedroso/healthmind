@@ -46,7 +46,10 @@ class Incubator:
                           f"Temperature: {temperature}°C, target: {self.target_temperature}°C\n" \
                           f"Incubator Devices:\n" \
                           f"Heater: {self.heater.get_state()}\n"
-                    email.send_email(msg)
+
+                    sentiment = get_sentiment(self.target_temperature, None, temperature, None, 0.1)
+                    email.send_email(msg, sentiment)
+
 
             print(f'temperature: {temperature} / {self.target_temperature} | heater: {heater_state}')
             if self.log_file:

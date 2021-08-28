@@ -88,7 +88,8 @@ class Terrarium:
                       f"Lights: {self.lights.get_state()}\n" \
                       f"Fans: {self.fans.get_state()}\n"
 
-                email.send_email(msg)
+                sentiment = get_sentiment(self.target_temperature, self.target_humidity, temperature, humidity, 0.1)
+                email.send_email(msg, sentiment)
 
         print(f'temperature: {temperature} / {self.target_temperature} | heater: {heaters_state} | ', end='')
         print(f'humidity: {humidity} / {self.target_humidity} | humidifier: {humidifier_state}')
@@ -103,3 +104,4 @@ class Terrarium:
                           f'fans: {fans_state}\n'
 
             self.file_logger.log(log_message)
+
