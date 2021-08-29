@@ -54,7 +54,7 @@ def get_room_readings_message():
     room_readings_message = f"\n\nRoom Indicators:\n" \
                             f"Temperature: {sensor_data['temperature']}°C\n" \
                             f"Humidity: {sensor_data['humidity']}%\n"
-    return room_readings_message
+    return room_readings_message, sensor_data
 
 
 def get_last_reboot_log_message():
@@ -113,3 +113,9 @@ def get_sentiment(target_t, target_h, temperature, humidity, tolerance):
         if target_h * lower_tol < humidity < target_h * upper_tol:
             sentiment = 'TAMO BEM'
     return sentiment
+
+
+def get_temperature_offset(target_temperature, room_temperature):
+    offset_ratio = 10
+    temperature_offset = (room_temperature - target_temperature) / offset_ratio
+    return temperature_offset

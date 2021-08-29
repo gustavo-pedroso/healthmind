@@ -50,6 +50,8 @@ class Incubator:
                     sentiment = get_sentiment(self.target_temperature, None, temperature, None, 0.2)
                     email.send_email(msg, sentiment)
 
+                    room_temperature = float(get_room_readings_message()[1]['temperature'])
+                    self.target_temperature += get_temperature_offset(self.target_temperature, room_temperature)
 
             print(f'temperature: {temperature} / {self.target_temperature} | heater: {heater_state}')
             if self.log_file:
@@ -58,6 +60,5 @@ class Incubator:
                               f'{heater_state}\n'
 
                 self.file_logger.log(log_message)
-
         except Exception as e:
             pass
