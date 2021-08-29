@@ -13,6 +13,7 @@ class Incubator:
         self.sensor = [DHTSensor(pin) for pin in sensor_gpio]
         self.heater = Switch(heater_gpio)
         self.target_temperature = target_temperature
+        self.set_target_temperature = target_temperature
         self.email_notify_hours = email_notify_hours
         self.update_time = update_time
         self.log_buffer = []
@@ -51,7 +52,7 @@ class Incubator:
                     email.send_email(msg, sentiment)
 
                     room_temperature = float(get_room_readings_message()[1]['temperature'])
-                    self.target_temperature += get_temperature_offset(self.target_temperature, room_temperature)
+                    self.target_temperature += get_temperature_offset(self.set_target_temperature, room_temperature)
 
             print(f'temperature: {temperature} / {self.target_temperature} | heater: {heater_state}')
             if self.log_file:
