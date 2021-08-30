@@ -117,5 +117,5 @@ def get_sentiment(target_t, target_h, temperature, humidity, tolerance):
 
 def get_temperature_offset(target_temperature, room_temperature):
     offset_ratio = 1 / 7
-    temperature_offset = (room_temperature - target_temperature) * offset_ratio
+    temperature_offset = round((room_temperature - target_temperature) * offset_ratio, 2)
     return temperature_offset if temperature_offset < 0 else 0
