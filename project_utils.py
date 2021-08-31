@@ -3,6 +3,7 @@ import signal
 import os
 import requests
 import json
+import numpy as np
 
 
 def kill_previous_from_file(file):
@@ -118,4 +119,15 @@ def get_sentiment(target_t, target_h, temperature, humidity, tolerance):
 def get_temperature_offset(target_temperature, room_temperature):
     offset_ratio = 1 / 7
     temperature_offset = round((room_temperature - target_temperature) * offset_ratio, 2)
+    print(f'temperature_offset = {temperature_offset}')
+    temperature_offset = round_closest_on_list(temperature_offset)
+    print(f'temperature_offset_after_round = {temperature_offset}')
     return temperature_offset if temperature_offset < 0 else 0
+
+
+def round_closest_on_list(num, list_=np.linspace(0, 50, 100)):
+    np_arr = np.array(list_)
+    absolute_val_array = np.abs(np_arr - num)
+    smallest_difference_index = absolute_val_array.argmin()
+    closest_element = np_arr[smallest_difference_index]
+    return closest_element
