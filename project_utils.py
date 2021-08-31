@@ -127,6 +127,7 @@ def get_temperature_offset(target_temperature, room_temperature):
 
 def round_closest_on_list(num, list_=np.linspace(-10, 0, 21)):
     np_arr = np.array(list_)
+    print(np_arr)
     absolute_val_array = np.abs(np_arr - num)
     smallest_difference_index = absolute_val_array.argmin()
     closest_element = np_arr[smallest_difference_index]
