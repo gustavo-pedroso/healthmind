@@ -125,7 +125,7 @@ def get_temperature_offset(target_temperature, room_temperature):
     return temperature_offset if temperature_offset < 0 else 0
 
 
-def round_closest_on_list(num, list_=np.linspace(-10, 0, 20)):
+def round_closest_on_list(num, list_=np.linspace(-10, 0, 21)):
     np_arr = np.array(list_)
     absolute_val_array = np.abs(np_arr - num)
     smallest_difference_index = absolute_val_array.argmin()
