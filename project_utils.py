@@ -4,6 +4,7 @@ import os
 import requests
 import json
 import numpy as np
+from pathlib import Path
 
 
 def kill_previous_from_file(file):
@@ -60,10 +61,12 @@ def get_room_readings_message():
 
 def get_last_reboot_log_message():
     default_log_file = '/home/pi/Documents/healthmind/reboot_logs.txt'
-    with open(default_log_file, 'r+') as f:
-        last_reboot_log = f.readlines()[-1]
-    last_reboot_log_message = f"Last Reboot log:\n{last_reboot_log}\n"
-    return last_reboot_log_message
+    if Path(default_log_file).is_file():
+        with open(default_log_file, 'r+') as f:
+            last_reboot_log = f.readlines()[-1]
+        last_reboot_log_message = f"Last Reboot log:\n{last_reboot_log}\n"
+        return last_reboot_log_message
+    return ''
 
 
 def read_sensors(sensors):
@@ -129,3 +132,4 @@ def round_closest_on_list(num, list_=np.linspace(-10, 0, 21)):
     smallest_difference_index = absolute_val_array.argmin()
     closest_element = np_arr[smallest_difference_index]
     return closest_element
+
