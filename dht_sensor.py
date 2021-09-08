@@ -15,7 +15,7 @@ class DHTSensor:
         self.min_t = -2.0
         self.max_t = 52.0
         self.min_h = 15.0
-        self.max_h = 95.0
+        self.max_h = 105.0
 
     def read(self):
         retry = 0
