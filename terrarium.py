@@ -9,7 +9,7 @@ import time
 class Terrarium:
 
     def __init__(self, sensor_gpio, humidifier_gpio, fans_gpio, heaters_gpio, lights_gpio, target_temperature,
-                 target_humidity, fans_active_time, fans_hours, lights_ranges, update_time, email_notify_hours,
+                 target_humidity, humidity_cycles, fans_active_time, fans_hours, lights_ranges, update_time, email_notify_hours,
                  log_file, json_email_info, json_api_info):
 
         self.sensor = [DHTSensor(pin) for pin in sensor_gpio]
@@ -19,6 +19,7 @@ class Terrarium:
         self.lights = Switch(lights_gpio)
         self.target_temperature = target_temperature
         self.target_humidity = target_humidity
+        self.humidity_cycles = humidity_cycles
         self.fans_active_time = fans_active_time
         self.fans_hours = fans_hours
         self.lights_ranges = lights_ranges
@@ -28,6 +29,8 @@ class Terrarium:
         self.log_file = log_file
         self.json_email_info = json_email_info
         self.json_api_info = json_api_info
+        self.cycles_on = 0
+        self.cycles_off = 0
 
         if self.log_file:
             self.file_logger = FileLogger(self.log_file)
@@ -48,10 +51,20 @@ class Terrarium:
             self.heaters.off()
 
         # monitor humidity
-        if humidity < self.target_humidity:
+        # if humidity < self.target_humidity:
+        #     self.humidifier.on()
+        # else:
+        #     self.humidifier.off()
+
+        if self.cycles_on < self.humidity_cycles:
+            self.cycles_on += 1
             self.humidifier.on()
         else:
+            self.cycles_off += 1
             self.humidifier.off()
+            if self.cycles_off > 100 - self.humidity_cycles:
+                self.cycles_off = 0
+                self.cycles_on = 0
 
         # monitor fans activation cycles
         if datetime.now().hour in self.fans_hours:
