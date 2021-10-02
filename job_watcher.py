@@ -34,7 +34,6 @@ class JobWatcher:
 
 
 if __name__ == '__main__':
-    job_watcher = JobWatcher(job_names={'terrarium_driver.py': 2, 'incubator_driver.py': 2},
-                             files_names=['/home/pi/Documents/healthmind/incubator_logs.txt',
-                                          '/home/pi/Documents/healthmind/terrarium_logs.txt'])
+    job_watcher = JobWatcher(job_names={'incubator_driver.py': 2},
+                             files_names=['/home/pi/Documents/healthmind/incubator_logs.txt'])
     job_watcher.scan()
