@@ -26,7 +26,7 @@ class DHTSensor:
                     self.last_valid = {'humidity': humidity, 'temperature': temperature}
                     self.current_failures_in_a_row = 0
                     return {'humidity': humidity, 'temperature': temperature}
-            print(f'sensor read invalid data: humidity: {humidity}, temperature: {temperature}')
+            print(f'sensor on P{self.gpio_number} read invalid data: humidity: {humidity}, temperature: {temperature}')
             retry += 1
         self.current_failures_in_a_row += 1
         if self.current_failures_in_a_row == self.max_failure_count_reboot:
