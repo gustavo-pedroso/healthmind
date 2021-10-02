@@ -21,10 +21,11 @@ class DHTSensor:
         retry = 0
         while retry <= self.max_retry:
             humidity, temperature = Adafruit_DHT.read_retry(11, self.gpio_number)
-            if self.min_t <= temperature <= self.max_t and self.min_h <= humidity <= self.max_h:
-                self.last_valid = {'humidity': humidity, 'temperature': temperature}
-                self.current_failures_in_a_row = 0
-                return {'humidity': humidity, 'temperature': temperature}
+            if humidity and temperature:
+                if self.min_t <= temperature <= self.max_t and self.min_h <= humidity <= self.max_h:
+                    self.last_valid = {'humidity': humidity, 'temperature': temperature}
+                    self.current_failures_in_a_row = 0
+                    return {'humidity': humidity, 'temperature': temperature}
             print(f'sensor read invalid data: humidity: {humidity}, temperature: {temperature}')
             retry += 1
         self.current_failures_in_a_row += 1
