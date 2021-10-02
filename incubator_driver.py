@@ -1,7 +1,7 @@
 from incubator import Incubator
 
 # create new Incubator with sensor, switch and target temperature
-incubator = Incubator(sensor_gpio=[23],
+incubator = Incubator(sensor_gpio=[23, 24],
                       heater_gpio=18,
                       target_temperature=27.0,
                       update_time=5,
