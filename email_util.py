@@ -20,7 +20,7 @@ class EmailUtil:
             message["To"] = self.email_info_json['to']
             message["Subject"] = f"{self.email_info_json['subject']} - ({sentiment})"
             message.attach(MIMEText(msg, "plain"))
-            message.attach(MIMEText(get_room_readings_message()[0], "plain"))
+            # message.attach(MIMEText(get_room_readings_message()[0], "plain"))
             message.attach(MIMEText(get_local_weather(self.json_api_info), "plain"))
             message.attach(MIMEText(get_last_reboot_log_message(), "plain"))
 
