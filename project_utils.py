@@ -52,7 +52,7 @@ def get_local_weather(api_info):
 
 def get_room_readings_message():
     from dht_sensor import DHTSensor
-    sensor_data = DHTSensor(5).read()
+    sensor_data = DHTSensor(25).read()
     room_readings_message = f"\n\nRoom Indicators:\n" \
                             f"Temperature: {sensor_data['temperature']}°C\n" \
                             f"Humidity: {sensor_data['humidity']}%\n"
